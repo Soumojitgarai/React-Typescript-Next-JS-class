@@ -1,0 +1,59 @@
+<!-- create a interactive calculator which can perform all 4 operations using callback function in js -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Calculator</title>
+</head>
+<body>
+
+<h1>Interactive Calculator</h1>
+<p>Enter two numbers and choose an operation:</p>
+
+<input type="number" id="num1" placeholder="First number">
+<input type="number" id="num2" placeholder="Second number">
+<br><br>
+<button onclick="calculate(add)">Add</button>
+<button onclick="calculate(subtract)">Subtract</button>
+<button onclick="calculate(multiply)">Multiply</button>
+<button onclick="calculate(divide)">Divide</button>
+
+<p id="result"></p>
+
+<script>
+    // Function to display the result
+    function displayResult(result) {
+        document.getElementById('result').innerHTML = 'Result: ' + result;
+    }
+
+    // Calculator functions for different operations
+    function add(a, b) {
+        return a + b;
+    }
+
+    function subtract(a, b) {
+        return a - b;
+    }
+
+    function multiply(a, b) {
+        return a * b;
+    }
+
+    function divide(a, b) {
+        if (b === 0) {
+            return 'Error: Division by zero';
+        }
+        return a / b;
+    }
+
+    // Function to perform the calculation with a callback
+    function calculate(operation) {
+        let num1 = parseFloat(document.getElementById('num1').value);
+        let num2 = parseFloat(document.getElementById('num2').value);
+        let result = operation(num1, num2);
+        displayResult(result);
+    }
+</script>
+
+</body>
+</html>

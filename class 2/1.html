@@ -1,0 +1,45 @@
+<!-- create a counter which can be increased and decreased with DOM (Document Object Model) -->  
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Counter Example</title>
+</head>
+<body>
+
+<h1>Counter: <span id="counter">0</span></h1>
+<button id="increment">Increment</button>
+<button id="decrement">Decrement</button>
+
+<script>
+    // Initialize the counter value
+    let count = 0;
+
+    // Get the elements from the DOM
+    const counterDisplay = document.getElementById('counter');
+    const incrementButton = document.getElementById('increment');
+    const decrementButton = document.getElementById('decrement');
+
+    // Function to update the counter display
+    function updateCounter() {
+        counterDisplay.textContent = count;
+    }
+
+    // Event listener for increment button
+    incrementButton.addEventListener('click', () => {
+        count++;
+        updateCounter();
+    });
+
+    // Event listener for decrement button
+    decrementButton.addEventListener('click', () => {
+        count--;
+        updateCounter();
+    });
+
+    // Initial display update
+    updateCounter();
+</script>
+
+</body>
+</html>

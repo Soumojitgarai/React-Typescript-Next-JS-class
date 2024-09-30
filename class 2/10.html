@@ -1,0 +1,53 @@
+<!-- create a prog that will delete the post request with title & description and show if the post is successfully deleted or not -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Post Example</title>
+</head>
+<body>
+
+<h1>Delete a Post</h1>
+<p>Enter the post ID and click "Delete Post":</p>
+
+<input type="number" id="postId" placeholder="Enter post ID">
+<br><br>
+<button id="deleteButton">Delete Post</button>
+
+<p id="responseMessage"></p>
+
+<script>
+    // Function to delete a post
+    function deletePost(postId) {
+        fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            document.getElementById('responseMessage').innerHTML = 'Post deleted successfully!';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('responseMessage').innerHTML = 'Error deleting post: ' + error.message;
+        });
+    }
+
+    // Add event listener to the button
+    document.getElementById('deleteButton').addEventListener('click', () => {
+        const postId = document.getElementById('postId').value;
+        if (postId) {
+            deletePost(postId);
+        } else {
+            alert('Please enter a valid post ID.');
+        }
+    });
+</script>
+
+</body>
+</html>

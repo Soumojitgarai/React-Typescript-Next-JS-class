@@ -1,0 +1,50 @@
+<!-- create a random user display using async/await function in js -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Async/Await Example</title>
+</head>
+<body>
+
+<h1>Random User Information</h1>
+<button id="fetchButton">Fetch User</button>
+<div id="userInfo"></div>
+
+<script>
+    // Define an async function to fetch user data
+    async function fetchUserData() {
+        try {
+            // Fetch data from the Random User API
+            let response = await fetch('https://randomuser.me/api/');
+            let data = await response.json();
+            
+            // Ensure we have the correct data structure
+            if (data.results && data.results.length > 0) {
+                let user = data.results[0]; // Access the first user in the results array
+                let userInfo = `
+                    <p>Name: ${user.name.first} ${user.name.last}</p>
+                    <p>Email: ${user.email}</p>
+                    <p>Location: ${user.location.city}, ${user.location.country}</p>
+                    <img src="${user.picture.medium}" alt="User Picture">
+                `;
+                
+                // Display user information on the webpage
+                document.getElementById('userInfo').innerHTML = userInfo;
+            } else {
+                document.getElementById('userInfo').innerHTML = 'No user data found.';
+            }
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            document.getElementById('userInfo').innerHTML = 'Error fetching user data.';
+        }
+    }
+
+    // Add event listener to the button
+    document.getElementById('fetchButton').addEventListener('click', fetchUserData);
+</script>
+
+</body>
+</html>
+
+

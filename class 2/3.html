@@ -1,0 +1,42 @@
+<!-- create a prog to print an array from 1 to 10 appending them in every 1 sec using async & promise in js -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Async/Await Example with promise</title>
+</head>
+<body>
+
+<h1>Data Processing Example</h1>
+<div id="output"></div>
+
+<script>
+    // Simulate fetching data from an API
+    async function fetchData(id) {
+        await delay(1000); // Simulate network delay
+        return { id: id, value: `Data ${id}` };
+    }
+
+    // Define a delay function using setTimeout
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // Define an async function to process an array of data
+    async function processArray() {
+        let array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let outputDiv = document.getElementById('output');
+
+        for (let id of array) {
+            let data = await fetchData(id); // Await the fetchData function
+            outputDiv.innerHTML += `<p>Processed: ${data.value}</p>`;
+        }
+    }
+
+    // Call the async function
+    processArray();
+</script>
+
+</body>
+</html>
+

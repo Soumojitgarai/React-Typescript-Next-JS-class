@@ -1,0 +1,46 @@
+<!-- create an image loader that can load image from a url using function in js -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Loader with Error Handling</title>
+</head>
+<body>
+
+<h1>Image Loader</h1>
+<p>Enter an image URL and click "Load Image":</p>
+
+<input type="text" id="imageUrl" placeholder="Enter image URL">
+<br><br>
+<button onclick="loadImage(displayImage)">Load Image</button>
+
+<div id="imageContainer"></div>
+
+<script>
+    // Function to display the image
+    function displayImage(imageUrl) {
+        let img = document.createElement('img');
+        img.src = imageUrl;
+        img.alt = 'Loaded Image';
+        img.style.maxWidth = '100%';
+        img.onerror = function() {
+            document.getElementById('imageContainer').innerHTML = 'Error loading image. Please check the URL and try again.';
+        };
+        document.getElementById('imageContainer').innerHTML = '';
+        document.getElementById('imageContainer').appendChild(img);
+    }
+
+    // Function to load the image with a callback
+    function loadImage(callback) {
+        let imageUrl = document.getElementById('imageUrl').value;
+        if (imageUrl) {
+            callback(imageUrl);
+        } else {
+            alert('Please enter a valid image URL.');
+        }
+    }
+</script>
+
+</body>
+</html>
+

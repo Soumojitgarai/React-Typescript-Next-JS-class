@@ -1,0 +1,47 @@
+<!-- create a countdown timmer which will take input the time from the user using promises in js -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Countdown Timer</title>
+</head>
+<body>
+
+<h1>Countdown Timer</h1>
+<p>Enter the number of seconds and click "Start Timer":</p>
+
+<input type="number" id="seconds" placeholder="Enter seconds">
+<br><br>
+<button id="startButton">Start Timer</button>
+
+<p id="timerDisplay"></p>
+
+<script>
+    // Function to create a delay
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // Function to start the countdown
+    async function startCountdown(seconds) {
+        for (let i = seconds; i >= 0; i--) {
+            document.getElementById('timerDisplay').innerHTML = `Time remaining: ${i} seconds`;
+            await delay(1000); // Wait for 1 second
+        }
+        document.getElementById('timerDisplay').innerHTML = 'Time is up!';
+    }
+
+    // Add event listener to the button
+    document.getElementById('startButton').addEventListener('click', () => {
+        let seconds = parseInt(document.getElementById('seconds').value);
+        if (!isNaN(seconds) && seconds > 0) {
+            startCountdown(seconds);
+        } else {
+            alert('Please enter a valid number of seconds.');
+        }
+    });
+</script>
+
+</body>
+</html>
+
